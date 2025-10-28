@@ -22,5 +22,15 @@ public class ChatServer {
         }
     }
 
-    // w przyszłości: metoda broadcast() żeby rozsyłać wiadomości
+    public static synchronized void broadcast(String message, WatekKlienta nadawca) {
+        for (WatekKlienta klient : klienci) {
+            if (klient != nadawca) {
+                klient.wyslijWiadomosc(message);
+            }
+        }
+    }
+
+    public static synchronized void usunKlienta(WatekKlienta klient) {
+        klienci.remove(klient);
+    }
 }
